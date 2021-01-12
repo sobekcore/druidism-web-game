@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta name="viewport" content="user-scalable=no,width=device-width">
+    <link href="druidism.css" rel="stylesheet" type="text/css">
+    <title>Druidism</title>
+  </head>
+  <body>
+    <!-- Game full canvas -->
+    <canvas></canvas>
+
+    <script type = "text/javascript">
+
+      let sources =
+      [
+        "javascript/controller.js",
+        "javascript/display.js",
+        "javascript/engine.js",
+        "javascript/game.js",
+        "javascript/main.js"
+      ];
+
+      for(let index = 0; index < sources.length; index++)
+      {
+        let script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        script.setAttribute("src", sources[index]);
+        document.head.appendChild(script);
+      }
+
+    </script>
+  </body>
+</html>
