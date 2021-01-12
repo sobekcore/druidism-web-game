@@ -51,7 +51,7 @@ const Display = function(canvas)
 
 Display.prototype =
 {
-  constructor : Display,
+  constructor: Display,
 
   render:function()
   {
