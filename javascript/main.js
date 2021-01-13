@@ -5,7 +5,7 @@ window.addEventListener("load", function(event)
     "use strict";
 
     // << Constants >>
-    const ZONE_PREFIX = "zones/zone";
+    const ZONE_PREFIX = "../zones/zone";
     const ZONE_SUFFIX = ".json";
 
     // << Classes >>
@@ -64,7 +64,7 @@ window.addEventListener("load", function(event)
 
       p.style.left = rectangle.left + "px";
       p.style.top = rectangle.top + "px";
-      p.style.fontSize = (game.world.tile_set.tile_size * rectangle.height / game.world.height) / 2 + "px";
+      p.style.fontSize = (game.world.tile_set.tile_size * rectangle.height / game.world.height) / 2.1 + "px";
     };
 
     var render = function()
@@ -160,7 +160,7 @@ window.addEventListener("load", function(event)
       {
         game.world.setup(zone);
 
-        assets_manager.requestImage("druidism.png", (image) =>
+        assets_manager.requestImage("../graphics/druidism.png", (image) =>
           {
             assets_manager.tile_set_image = image;
 

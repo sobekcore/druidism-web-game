@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+*
+{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::selection
+{
+  background-color: #5da892;
+  color: #a4d6ba;
+}
+
+html
+{
+  height: 100%;
+  width: 100%;
+}
+
+body
+{
+  background:
+    url("/graphics/background.png") no-repeat fixed center / contain;
+  background-color: #7C5A3A;
+  image-rendering: pixelated;
+  height: 100%;
+  width: 100%;
+}
+
+#content
+{
+  align-content: center;
+  align-items: space-around;
+  display: grid;
+  justify-items: center;
+  height: 100%;
+}
+
+#logo
+{
+  width: 800px;
+  max-width: 60vw;
+  margin-bottom: 45px;
+}
+
+button
+{
+  font: bold 1em "Montserrat", sans-serif;
+  background-color: #553F2A;
+  text-transform: uppercase;
+  color: #73C485;
+  padding: 12px 40px;
+  border: 4px solid black;
+  border-radius: 12px;
+  transition: .3s all;
+  cursor: pointer;
+}
+
+button:hover
+{
+  background-color: #6B4728;
+  padding: 12px 80px;
+  box-shadow: 3px 4px black, -3px -4px black;
+  color: rgb(188, 223, 196);
+}
+
+button:focus { outline: 0; }
+
+#play { margin-bottom: 18px; }
+#play button { font-size: 60px; }
+#about button { font-size: 28px; }
+
+ul
+{
+  position:absolute;
+  right: 0;
+  display: inline-flex;
+  list-style: none;
+  background-color: rgba(32, 22, 13, 0.15);
+  margin: 10px;
+  border-radius: 10px;
+}
+
+ul li
+{
+  padding: 5px;
+  width: 60px;
+  height: 60px;
+  transition: .2s ease-in-out;
+}
+
+ul li:hover
+{
+  background-color: rgba(32, 22, 13, 0.25);
+  border-radius: 10px;
+  width: 70px;
+  height: 70px;
+}
+
+#unplayable
+{
+  display: none;
+}
+
+/* Unplayable screen */
+@media(max-width: 549px)
+{
+  #unplayable
+  {
+    font: bold 40px "Montserrat", sans-serif;
+    display: grid;
+    position: absolute;
+    text-align: center;
+    align-content: center;
+    background-color: #7C5A3A;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+  }
+
+  #about
+  {
+    position: absolute;
+    text-align: center;
+    bottom: 20px;
+    width: 100%;
+    z-index: 1;
+  }
+}

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue&display=swap');
+
 *
 {
   box-sizing: border-box;
@@ -29,12 +31,36 @@ canvas
 
 p
 {
+  font-family: "Helvetica Neue";
   position: fixed;
-  color: rgb(115, 196, 133);
+  color: #7EC29B;
   background-color: rgba(32, 22, 13, 0.4);
   margin: 8px 0 0 10px;
   padding: 3px 14px;
   border: 3px solid black;
   border-radius: 10px;
   user-select: none;
+}
+
+#unplayable
+{
+  display: none;
+}
+
+/* Unplayable screen */
+@media(max-width: 549px)
+{
+  #unplayable
+  {
+    font: bold 40px "Montserrat", sans-serif;
+    display: grid;
+    position: absolute;
+    text-align: center;
+    align-content: center;
+    background-color: #7C5A3A;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    z-index: 1;
+  }
 }
