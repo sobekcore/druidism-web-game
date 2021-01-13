@@ -59,10 +59,18 @@ window.addEventListener("load", function(event)
       );
 
       display.render();
+
+      var rectangle = display.context.canvas.getBoundingClientRect();
+
+      p.style.left = rectangle.left + "px";
+      p.style.top = rectangle.top + "px";
+      p.style.fontSize = (game.world.tile_set.tile_size * rectangle.height / game.world.height) / 2 + "px";
     };
 
     var render = function()
     {
+      var frame = undefined;
+
       display.drawMap(
         assets_manager.tile_set_image,
         game.world.tile_set.columns,
@@ -71,12 +79,41 @@ window.addEventListener("load", function(event)
         game.world.tile_set.tile_size
       );
 
-      let frame = game.world.tile_set.frames[game.world.player.frame_value];
+      for(let index = game.world.mushrooms.length - 1; index > -1; --index)
+      {
+        let mushroom = game.world.mushrooms[index];
+
+        frame = game.world.tile_set.frames[mushroom.frame_value];
+
+        display.drawObject(
+          assets_manager.tile_set_image, frame.x, frame.y,
+          mushroom.x + Math.floor(mushroom.width * 0.5 - frame.width * 0.5) + frame.offset_x,
+          mushroom.y + frame.offset_y, frame.width, frame.height
+        );
+      }
+
+      frame = game.world.tile_set.frames[game.world.player.frame_value];
 
       display.drawObject(
         assets_manager.tile_set_image, frame.x, frame.y,
         game.world.player.x + Math.floor(game.world.player.width * 0.5 - frame.width * 0.5) + frame.offset_x,
-        game.world.player.y + frame.offset_y, frame.width, frame.height);
+        game.world.player.y + frame.offset_y, frame.width, frame.height
+      );
+
+      for(let index = game.world.grass.length - 1; index > -1; --index)
+      {
+        let grass = game.world.grass[index];
+
+        frame = game.world.tile_set.frames[grass.frame_value];
+
+        display.drawObject(
+          assets_manager.tile_set_image, frame.x, frame.y,
+          grass.x + frame.offset_x,
+          grass.y + frame.offset_y, frame.width, frame.height
+        );
+      }
+
+      p.innerHTML = "Mushrooms: " + game.world.mushroom_count;
 
       display.render();
     };
@@ -109,6 +146,10 @@ window.addEventListener("load", function(event)
     var display        = new Display(document.querySelector("canvas"));
     var game           = new Game() ;
     var engine         = new Engine(1000/30, render, update);
+
+    var p = document.createElement("p");
+    p.innerHTML = "Mushrooms: 0";
+    document.body.appendChild(p);
 
     // << Initialize >>
     display.buffer.canvas.height = game.world.height;

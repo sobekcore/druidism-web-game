@@ -12,14 +12,14 @@ const Game = function()
 
 Game.prototype = { constructor: Game };
 
-Game.Animator = function(frame_set, delay)
+Game.Animator = function(frame_set, delay, mode = "loop")
 {
   this.count = 0;
   this.delay = (delay >= 1) ? delay : 1;
   this.frame_set = frame_set;
   this.frame_index = 0;
   this.frame_value = frame_set[0];
-  this.mode = "pause";
+  this.mode = mode;
 }
 
 Game.Animator.prototype =
@@ -148,7 +148,7 @@ Game.Collider.prototype =
   }
 };
 
-Game.Frame = function(x, y, width, height, offset_x, offset_y)
+Game.Frame = function(x, y, width, height, offset_x = 0, offset_y = 0)
 {
   this.x = x;
   this.y = y;
@@ -171,6 +171,29 @@ Game.Object = function(x, y, width, height)
 Game.Object.prototype =
 {
   constructor: Game.Object,
+
+  collideObject:function(object)
+  {
+    if(this.getRight() < object.getLeft() ||
+       this.getBottom() < object.getTop() ||
+       this.getLeft() > object.getRight() ||
+       this.getTop() > object.getBottom()
+    ) return false;
+
+    return true;
+  },
+
+  collideObjectCenter:function(object)
+  {
+    let center_x = object.getCenterX();
+    let center_y = object.getCenterY();
+
+    if(center_x < this.getLeft() || center_x > this.getRight() ||
+       center_y < this.getTop() || center_y > this.getBottom()
+    ) return false;
+
+    return true;
+  },
 
   getBottom : function() { return this.y + this.height; },
   getCenterX: function() { return this.x + this.width  * 0.5; },
@@ -217,6 +240,44 @@ Game.MovingObject.prototype =
 Object.assign(Game.MovingObject.prototype, Game.Object.prototype);
 Game.MovingObject.prototype.constructor = Game.MovingObject;
 
+Game.Mushroom = function(x, y)
+{
+  Game.Object.call(this, x, (y + 2), 7, 14);
+  Game.Animator.call(this, Game.Mushroom.prototype.frame_sets["twirl"], 15);
+
+  this.frame_index = Math.floor(Math.random() * 2);
+
+  this.base_x = x;
+  this.base_y = y;
+  this.position_x = Math.random() * Math.PI * 2;
+  this.position_y = this.position_x * 2;
+};
+
+Game.Mushroom.prototype =
+{
+  frame_sets: { "twirl": [12, 13] },
+  updatePosition:function() {}
+};
+
+Object.assign(Game.Mushroom.prototype, Game.Animator.prototype);
+Object.assign(Game.Mushroom.prototype, Game.Object.prototype);
+Game.Mushroom.prototype.constructor = Game.Mushroom;
+
+Game.Grass = function(x, y)
+{
+  Game.Animator.call(this, Game.Grass.prototype.frame_sets["wave"], 25);
+
+  this.x = x;
+  this.y = y;
+};
+
+Game.Grass.prototype =
+{
+  frame_sets: { "wave": [14, 15, 16, 15] }
+};
+
+Object.assign(Game.Grass.prototype, Game.Animator.prototype);
+
 Game.Door = function(door)
 {
   Game.Object.call(this, door.x, door.y, door.width, door.height);
@@ -226,21 +287,7 @@ Game.Door = function(door)
   this.destination_zone = door.destination_zone;
 };
 
-
-Game.Door.prototype =
-{
-  collideObject(object)
-  {
-    let center_x = object.getCenterX();
-    let center_y = object.getCenterY();
-
-    if(center_x < this.getLeft() || center_x > this.getRight() ||
-       center_y < this.getTop() || center_y > this.getBottom()) return false;
-
-    return true;
-  }
-};
-
+Game.Door.prototype = {};
 Object.assign(Game.Door.prototype, Game.Object.prototype);
 Game.Door.prototype.constructor = Game.Door;
 
@@ -250,7 +297,7 @@ Game.Player = function(x, y)
   Game.Animator.call(this, Game.Player.prototype.frame_sets["idle-left"], 10);
 
   this.jumping = true;
-  this.direction_x = -1;
+  this.direction_x = 1; // -1
   this.velocity_x = 0;
   this.velocity_y = 0;
 };
@@ -346,7 +393,14 @@ Game.TileSet = function(columns, tile_size)
     new f(14, 112, 14, 16, 0, -2), // Walk-Right
     new f(28, 112, 14, 16, 0, -2),
     new f(42, 112, 14, 16, 0, -2),
-    new f(56, 112, 14, 16, 0, -2)
+    new f(56, 112, 14, 16, 0, -2),
+
+    new f(84, 112, 14, 16), // Mushroom
+    new f(98, 112, 14, 16),
+
+    new f(112, 115, 16,  4), // Grass
+    new f(112, 124, 16, 4),
+    new f(112, 119, 16, 4)
   ];
 };
 
@@ -363,10 +417,12 @@ Game.World = function(friction = 0.85, gravity = 2)
   this.rows = 9;
 
   this.tile_set = new Game.TileSet(8, 16);
-  this.player = new Game.Player(32, 76);
+  this.player = new Game.Player(37, 76);
 
   this.zone_id = "00";
 
+  this.mushrooms = [];
+  this.mushroom_count = 0;
   this.doors = [];
   this.door = undefined;
 
@@ -405,17 +461,38 @@ Game.World.prototype =
 
   setup:function(zone)
   {
+    this.mushrooms = new Array();
+    this.doors = new Array();
+    this.grass = new Array();
+
     this.graphical_map = zone.graphical_map;
     this.collision_map = zone.collision_map;
     this.columns = zone.columns;
     this.rows = zone.rows;
-    this.doors = new Array();
     this.zone_id = zone.id;
+
+    for(let index = zone.mushrooms.length - 1; index > -1; --index)
+    {
+      let mushroom = zone.mushrooms[index];
+      this.mushrooms[index] = new Game.Mushroom(
+        mushroom[0] * this.tile_set.tile_size + 5,
+        mushroom[1] * this.tile_set.tile_size - 2
+      );
+    }
 
     for(let index = zone.doors.length - 1; index > -1; --index)
     {
       let door = zone.doors[index];
       this.doors[index] = new Game.Door(door);
+    }
+
+    for(let index = zone.grass.length - 1; index > -1; --index)
+    {
+      let grass = zone.grass[index];
+      this.grass[index] = new Game.Grass(
+        grass[0] * this.tile_set.tile_size,
+        grass[1] * this.tile_set.tile_size + 12
+      );
     }
 
     if(this.door)
@@ -441,14 +518,34 @@ Game.World.prototype =
     this.player.updatePosition(this.gravity, this.friction);
     this.collideObject(this.player);
 
+    for(let index = this.mushrooms.length - 1; index > -1; --index)
+    {
+      let mushroom = this.mushrooms[index];
+
+      mushroom.updatePosition();
+      mushroom.animate();
+
+      if(mushroom.collideObject(this.player))
+      {
+        this.mushrooms.splice(this.mushrooms.indexOf(mushroom), 1);
+        this.mushroom_count++;
+      }
+    }
+
     for(let index = this.doors.length - 1; index > -1; --index)
     {
       let door = this.doors[index];
 
-      if(door.collideObject(this.player))
+      if(door.collideObjectCenter(this.player))
       {
         this.door = door;
       }
+    }
+
+    for(let index = this.grass.length - 1; index > -1; --index)
+    {
+      let grass = this.grass[index];
+      grass.animate();
     }
 
     this.player.updateAnimation();
