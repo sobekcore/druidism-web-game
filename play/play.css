@@ -24,14 +24,18 @@ body
   width: 100%;
 }
 
-canvas
+::selection
 {
-  image-rendering: pixelated;
+  background-color: #5da892;
+  color: #a4d6ba;
 }
+
+canvas { image-rendering: pixelated; }
 
 p
 {
   font-family: "Helvetica Neue";
+  font-weight: 600;
   position: fixed;
   color: #7EC29B;
   background-color: rgba(32, 22, 13, 0.4);
@@ -42,10 +46,43 @@ p
   user-select: none;
 }
 
-#unplayable
+span
 {
-  display: none;
+  position: absolute;
+  font: bold 60px "Helvetica Neue", sans-serif;
+  background-color: #7C5A3A;
+  text-align: center;
+  align-content: center;
+  display: grid;
+  justify-items: center;
+  height: 100%;
+  width: 100%;
 }
+
+#restart
+{
+  position: absolute;
+  background-color: rgba(32, 22, 13, 0.15);
+  border-radius: 10px;
+  margin: 18px;
+  padding: 7px;
+  left: 0;
+  top: 0;
+  width: 70px;
+  height: 70px;
+  z-index: 1;
+  transition: .2s ease-in-out;
+}
+
+#restart:hover
+{
+  background-color: rgba(32, 22, 13, 0.25);
+  width: 85px;
+  height: 85px;
+}
+
+#restart:focus { outline: 0; }
+#unplayable { display: none; }
 
 /* Unplayable screen */
 @media(max-width: 549px)

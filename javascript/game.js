@@ -1,5 +1,4 @@
 // << GAME FILE >>
-
 const Game = function()
 {
   this.world = new Game.World();
@@ -243,7 +242,7 @@ Game.MovingObject.prototype.constructor = Game.MovingObject;
 Game.Mushroom = function(x, y)
 {
   Game.Object.call(this, x, (y + 2), 7, 14);
-  Game.Animator.call(this, Game.Mushroom.prototype.frame_sets["twirl"], 15);
+  Game.Animator.call(this, Game.Mushroom.prototype.frame_sets["stay"], 15);
 
   this.frame_index = Math.floor(Math.random() * 2);
 
@@ -255,7 +254,7 @@ Game.Mushroom = function(x, y)
 
 Game.Mushroom.prototype =
 {
-  frame_sets: { "twirl": [12, 13] },
+  frame_sets: { "stay": [12, 13] },
   updatePosition:function() {}
 };
 
@@ -290,6 +289,36 @@ Game.Door = function(door)
 Game.Door.prototype = {};
 Object.assign(Game.Door.prototype, Game.Object.prototype);
 Game.Door.prototype.constructor = Game.Door;
+
+Game.Complete = function(x, y)
+{
+  Game.Object.call(this, x, y, 7, 14);
+  Game.Animator.call(this, Game.Complete.prototype.frame_sets["twirl"], 17);
+
+  this.frame_index = Math.floor(Math.random() * 2);
+
+  this.base_x = x;
+  this.base_y = y;
+  this.position_x = Math.random() * Math.PI * 2;
+  this.position_y = this.position_x * 2;
+};
+
+Game.Complete.prototype =
+{
+  frame_sets: { "twirl": [17] },
+  updatePosition:function()
+  {
+    this.position_x += 0.1;
+    this.position_y += 0.2;
+
+    this.x = this.base_x + Math.cos(this.position_x) * 2;
+    this.y = this.base_y + Math.sin(this.position_y);
+  }
+};
+
+Object.assign(Game.Complete.prototype, Game.Animator.prototype);
+Object.assign(Game.Complete.prototype, Game.Object.prototype);
+Game.Complete.prototype.constructor = Game.Complete;
 
 Game.Player = function(x, y)
 {
@@ -398,9 +427,11 @@ Game.TileSet = function(columns, tile_size)
     new f(84, 112, 14, 16), // Mushroom
     new f(98, 112, 14, 16),
 
-    new f(112, 115, 16,  4), // Grass
+    new f(112, 115, 16, 4), // Grass
     new f(112, 124, 16, 4),
-    new f(112, 119, 16, 4)
+    new f(112, 119, 16, 4),
+
+    new f(16, 128, 16, 16) // Complete
   ];
 };
 
@@ -425,6 +456,8 @@ Game.World = function(friction = 0.85, gravity = 2)
   this.mushroom_count = 0;
   this.doors = [];
   this.door = undefined;
+
+  this.complete = [];
 
   this.height = this.tile_set.tile_size * this.rows;
   this.width = this.tile_set.tile_size * this.columns;
@@ -464,6 +497,7 @@ Game.World.prototype =
     this.mushrooms = new Array();
     this.doors = new Array();
     this.grass = new Array();
+    this.complete = new Array();
 
     this.graphical_map = zone.graphical_map;
     this.collision_map = zone.collision_map;
@@ -492,6 +526,15 @@ Game.World.prototype =
       this.grass[index] = new Game.Grass(
         grass[0] * this.tile_set.tile_size,
         grass[1] * this.tile_set.tile_size + 12
+      );
+    }
+
+    for(let index = zone.complete.length - 1; index > -1; --index)
+    {
+      let complete = zone.complete[index];
+      this.complete[index] = new Game.Complete(
+        complete[0] * this.tile_set.tile_size + 5,
+        complete[1] * this.tile_set.tile_size - 3
       );
     }
 
@@ -539,6 +582,27 @@ Game.World.prototype =
       if(door.collideObjectCenter(this.player))
       {
         this.door = door;
+      }
+    }
+
+    for(let index = this.complete.length - 1; index > -1; --index)
+    {
+      let complete = this.complete[index];
+
+      complete.updatePosition();
+      complete.animate();
+
+      if(complete.collideObject(this.player))
+      {
+        this.complete.splice(this.complete.indexOf(complete), 1);
+
+        var br = document.createElement("br");
+        var span = document.createElement("span");
+        span.innerHTML = "Game completed!"; span.appendChild(br);
+        span.innerHTML = span.innerHTML + "You have collected " + this.mushroom_count + " mushrooms.";
+        document.getElementById("restart").style.display = "inline";
+
+        document.body.appendChild(span);
       }
     }
 

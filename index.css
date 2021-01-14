@@ -54,7 +54,7 @@ button
   padding: 12px 40px;
   border: 4px solid black;
   border-radius: 12px;
-  transition: .3s all;
+  transition: .25s ease-in-out;
   cursor: pointer;
 }
 
@@ -99,10 +99,7 @@ ul li:hover
   height: 70px;
 }
 
-#unplayable
-{
-  display: none;
-}
+#unplayable { display: none; }
 
 /* Unplayable screen */
 @media(max-width: 549px)

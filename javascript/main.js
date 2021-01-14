@@ -113,6 +113,19 @@ window.addEventListener("load", function(event)
         );
       }
 
+      for(let index = game.world.complete.length - 1; index > -1; --index)
+      {
+        let complete = game.world.complete[index];
+
+        frame = game.world.tile_set.frames[complete.frame_value];
+
+        display.drawObject(
+          assets_manager.tile_set_image, frame.x, frame.y,
+          complete.x + Math.floor(complete.width * 0.5 - frame.width * 0.5) + frame.offset_x,
+          complete.y + frame.offset_y, frame.width, frame.height
+        );
+      }
+
       p.innerHTML = "Mushrooms: " + game.world.mushroom_count;
 
       display.render();

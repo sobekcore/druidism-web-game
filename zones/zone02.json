@@ -1,9 +1,11 @@
 {
-  "mushrooms":[[10, 7]],
+  "mushrooms":[],
 
   "grass":[[2, 7], [3, 7], [5, 7], [6, 7], [9, 2]],
 
   "doors":[],
+
+  "complete":[[10, 7]],
 
   "columns":12,
   "rows"   :9,
