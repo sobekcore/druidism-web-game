@@ -1,10 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 *
 {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+::selection
+{
+  background-color: #5DA892;
+  color: #BDDFCC;
 }
 
 html
@@ -24,17 +31,11 @@ body
   width: 100%;
 }
 
-::selection
-{
-  background-color: #5da892;
-  color: #a4d6ba;
-}
-
 canvas { image-rendering: pixelated; }
 
 p
 {
-  font-family: "Helvetica Neue";
+  font-family: "Ubuntu";
   font-weight: 600;
   position: fixed;
   color: #7EC29B;
@@ -46,43 +47,85 @@ p
   user-select: none;
 }
 
-span
+#game-completed
 {
   position: absolute;
-  font: bold 60px "Helvetica Neue", sans-serif;
-  background-color: #7C5A3A;
+  background:
+    linear-gradient(to bottom, rgba(138, 102, 70, 0.65) 100%, transparent 0) top/100% no-repeat,
+    linear-gradient(to top, transparent 86%, rgb(37, 27, 15) 0) top/100% no-repeat,
+    linear-gradient(to bottom, transparent 86%, rgb(37, 27, 15) 0) top/100% no-repeat;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+span, h2
+{
+  position: absolute;
   text-align: center;
   align-content: center;
   display: grid;
   justify-items: center;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  z-index: 2;
 }
+
+span
+{
+  font: bold 110px "Ubuntu", sans-serif;
+  text-shadow: 5px 5px rgb(18, 158, 116);
+  color: rgb(25, 223, 163);
+  margin-top: -115px;
+}
+
+h2 { font: bold 60px "Ubuntu", sans-serif; }
 
 #restart
 {
   position: absolute;
-  background-color: rgba(32, 22, 13, 0.15);
-  border-radius: 10px;
-  margin: 18px;
-  padding: 7px;
   left: 0;
   top: 0;
+  margin: 18px;
+  padding: 7px;
   width: 70px;
   height: 70px;
-  z-index: 1;
-  transition: .2s ease-in-out;
+  z-index: 3;
+  transition: .35s ease-in-out;
+  transform-origin: center;
+  user-select: none;
 }
 
 #restart:hover
 {
-  background-color: rgba(32, 22, 13, 0.25);
+  animation: rotating .45s;;
+  filter: brightness(0.6);
   width: 85px;
   height: 85px;
 }
 
+@keyframes rotating
+{
+  from{ transform: rotate(0deg); }
+  to{ transform: rotate(-360deg); }
+}
+
 #restart:focus { outline: 0; }
 #unplayable { display: none; }
+
+
+/* Font resizing */
+@media(max-width: 909px)
+{
+  span { font: bold 80px "Ubuntu", sans-serif; margin-top: -80px; }
+  h2 { font: bold 45px "Ubuntu", sans-serif; }
+}
+
+@media(max-width: 679px)
+{
+  span { font: bold 60px "Ubuntu", sans-serif; margin-top: -60px; }
+  h2 { font: bold 35px "Ubuntu", sans-serif; }
+}
 
 /* Unplayable screen */
 @media(max-width: 549px)
@@ -98,6 +141,6 @@ span
     width: 100%;
     height: 100%;
     padding: 30px;
-    z-index: 1;
+    z-index: 3;
   }
 }

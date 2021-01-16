@@ -4,6 +4,10 @@
   <head>
     <meta name="viewport" content="user-scalable=no,width=device-width">
     <link href="about.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="../graphics/favicon.ico" />
+    <meta name="description" content="Creative platformer game with super smooth playstyle. Play as a druid, collect
+    mushrooms and reach finishing line. Made with pixel art, HTML and Vanilla JS."/>
+    <meta name="keywords" content="platformer, indie, druid, druidism, pixel art, smooth, speed run"/>
     <link rel="canonical" href="/about">
     <title>Druidism - About</title>
   </head>
@@ -16,12 +20,19 @@
     <div id="content">
       <img id="logo" src="/graphics/logo.png">
       <h3>
-        Druidism is a 16-bit platformer game made with Vanilla JS <span role="img" aria-label="javascript">🍦</span>.
+        Druidism is a 16-bit platformer game made with HTML and Vanilla JS <span role="img" aria-label="javascript">🍦</span>.
         With the help of The Great Almighty Internet i've managed to create this game, and make it playable.
         In this game you are a druid (who would guess it lol) who is trying to finish his path in shorthest time
         possible, also picking as many mushrooms as possible. Contact me in any way you want if you have any questions.
         Have fun playing <span role="img" aria-label="smile">🙂</span>
       </h3>
     </div>
+
+    <script type = "text/javascript">
+      // No animations on load
+      document.body.classList.add("no-transition");
+      document.body.classList.remove("no-transition");
+      setTimeout(() => document.body.classList.remove("no-transition"), 1);
+    </script>
   </body>
 </html>

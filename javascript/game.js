@@ -448,7 +448,7 @@ Game.World = function(friction = 0.85, gravity = 2)
   this.rows = 9;
 
   this.tile_set = new Game.TileSet(8, 16);
-  this.player = new Game.Player(37, 76);
+  this.player = new Game.Player(52, 76);
 
   this.zone_id = "00";
 
@@ -596,13 +596,15 @@ Game.World.prototype =
       {
         this.complete.splice(this.complete.indexOf(complete), 1);
 
-        var br = document.createElement("br");
         var span = document.createElement("span");
-        span.innerHTML = "Game completed!"; span.appendChild(br);
-        span.innerHTML = span.innerHTML + "You have collected " + this.mushroom_count + " mushrooms.";
+        var h2 = document.createElement("h2");
+        span.innerHTML = "Game completed!";
+        h2.innerHTML = "You have collected " + this.mushroom_count + " mushrooms.";
         document.getElementById("restart").style.display = "inline";
+        document.getElementById("game-completed").style.display = "block";
 
         document.body.appendChild(span);
+        document.body.appendChild(h2);
       }
     }
 

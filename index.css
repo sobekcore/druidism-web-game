@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 *
@@ -9,8 +10,8 @@
 
 ::selection
 {
-  background-color: #5da892;
-  color: #a4d6ba;
+  background-color: #5DA892;
+  color: #BDDFCC;
 }
 
 html
@@ -29,6 +30,8 @@ body
   width: 100%;
 }
 
+.no-transition * { transition: none !important; }
+
 #content
 {
   align-content: center;
@@ -42,33 +45,33 @@ body
 {
   width: 800px;
   max-width: 60vw;
-  margin-bottom: 45px;
+  margin-bottom: 40px;
 }
 
 button
 {
-  font: bold 1em "Montserrat", sans-serif;
-  background-color: #553F2A;
+  font: bold 1em "Ubuntu", sans-serif;
+  background-color: #5f442b;
   text-transform: uppercase;
   color: #73C485;
   padding: 12px 40px;
   border: 4px solid black;
   border-radius: 12px;
-  transition: .25s ease-in-out;
+  transition: .2s ease-in-out;
   cursor: pointer;
 }
 
 button:hover
 {
-  background-color: #6B4728;
-  padding: 12px 80px;
-  box-shadow: 3px 4px black, -3px -4px black;
-  color: rgb(188, 223, 196);
+  transform: scale(1.07) rotate(4deg);
+  background-color: #805027;
+  color: rgb(194, 228, 202);
+  padding: 12px 60px;
 }
 
 button:focus { outline: 0; }
 
-#play { margin-bottom: 18px; }
+#play { margin-bottom: 22px; }
 #play button { font-size: 60px; }
 #about button { font-size: 28px; }
 
@@ -78,31 +81,51 @@ ul
   right: 0;
   display: inline-flex;
   list-style: none;
-  background-color: rgba(32, 22, 13, 0.15);
-  margin: 10px;
-  border-radius: 10px;
+  margin: 11px;
 }
 
 ul li
 {
-  padding: 5px;
-  width: 60px;
-  height: 60px;
-  transition: .2s ease-in-out;
+  margin: 4px 7px 15px 7px;
+  border-radius: 8px;
+  border: 4px solid;
+  text-align: center;
+  width: 55px;
+  height: 55px;
+  right: 0;
+  padding-top: 8px;
+  line-height: 1px;
+  transition: all 0.3s;
+}
+
+ul li
+{
+  border-color: black;
+  background-color: #2B8568;
+}
+
+ul li img
+{
+  box-sizing: content-box;
+  width: 36px;
+  height: 36px;
+  padding: 9px;
+  margin: -11px;
+  transition: all 0.3s;
 }
 
 ul li:hover
 {
-  background-color: rgba(32, 22, 13, 0.25);
-  border-radius: 10px;
-  width: 70px;
-  height: 70px;
+  background-color: #8ED3AB;
+  transform: rotate(6deg) scale(1.25);
 }
+
+ul li img:hover { filter: brightness(2); }
 
 #unplayable { display: none; }
 
 /* Unplayable screen */
-@media(max-width: 549px)
+@media(max-width: 549px), (max-height: 419px)
 {
   #unplayable
   {
