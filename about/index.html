@@ -12,6 +12,7 @@
     <title>Druidism - About</title>
   </head>
   <body>
+    <div class="loader"><img src="/graphics/loading.svg" alt="Loading..." /></div>
     <a id="go-back" href="../"><img src="../graphics/go-back.svg"/></a>
     <ul>
       <li><a href="https://twitter.com/druidismgame"><img src="/graphics/twitter-icon.svg"></a></li>
@@ -33,6 +34,14 @@
       document.body.classList.add("no-transition");
       document.body.classList.remove("no-transition");
       setTimeout(() => document.body.classList.remove("no-transition"), 1);
+
+      // Page loading animation
+      window.addEventListener("load", function()
+        {
+          const loader = document.querySelector(".loader");
+          loader.className += " hidden";
+        }
+      );
     </script>
   </body>
 </html>
