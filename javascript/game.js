@@ -534,7 +534,7 @@ Game.World.prototype =
       let complete = zone.complete[index];
       this.complete[index] = new Game.Complete(
         complete[0] * this.tile_set.tile_size + 5,
-        complete[1] * this.tile_set.tile_size - 3
+        complete[1] * this.tile_set.tile_size - 1 // possibly -4?
       );
     }
 
@@ -595,6 +595,7 @@ Game.World.prototype =
       if(complete.collideObject(this.player))
       {
         this.complete.splice(this.complete.indexOf(complete), 1);
+        this.player.x = -32; this.player.y = -32;
 
         var span = document.createElement("span");
         var h2 = document.createElement("h2");

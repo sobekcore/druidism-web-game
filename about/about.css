@@ -24,6 +24,7 @@ body
   background:
     url("/graphics/background.png") no-repeat fixed center / contain;
   background-color: #7C5A3A;
+  -webkit-tap-highlight-color: transparent;
   image-rendering: pixelated;
   height: 100%;
   width: 100%;
@@ -172,20 +173,19 @@ ul li img:hover { filter: brightness(2) saturate(0.9); }
 
 
 /* Unplayable screen */
-@media(max-width: 749px), (max-height: 419px)
+@media(max-width: 749px), (max-height: 549px)
 {
   body { background-image: none; }
 }
 
-@media(max-width: 549px), (max-height: 419px)
+@media(max-width: 549px), (max-height: 519px)
 {
-  #logo { display: none; }
+  #logo { margin-top: 100px; }
 
   #content { align-content: start; }
 
   #content h3
   {
-    padding-top: 110px;
     padding-bottom: 40px;
     max-width: 75vw;
   }
