@@ -9,3 +9,12 @@ You simply download the project and start local http server and launch the proje
 ## How to create maps? :scroll:
 
 You can create maps with programs like Tiled and tileset that is provided into the project. Also you would need to create collision matrix, and place object with coordinates into the map.
+
+## Features soon to be added (or possibly added :wink:)
+
+* More game modes (eg. story mode, speed run mode)
+* More levels with bigger variety
+* Improving sprite sheets
+* Maybe improved starting and about page (?)
+* More animations
+* More smooooothness

@@ -180,7 +180,7 @@ ul li img:hover { filter: brightness(2) saturate(0.9); }
 
 @media(max-width: 549px), (max-height: 519px)
 {
-  #logo { margin-top: 100px; }
+  #logo { margin-top: 108px; }
 
   #content { align-content: start; }
 
