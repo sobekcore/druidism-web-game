@@ -8,6 +8,11 @@ window.addEventListener("load", function(event)
     const ZONE_PREFIX = "../zones/zone";
     const ZONE_SUFFIX = ".json";
 
+    // Looped music playing
+    var music = new Audio("../audio/music.wav");
+    music.loop = true;
+    window.addEventListener("keydown", function() { music.play(); });
+
     // << Classes >>
     const AssetsManager = function()
     {
@@ -69,6 +74,17 @@ window.addEventListener("load", function(event)
 
     var render = function()
     {
+      // Sound toggle
+      if(change == true)
+      {
+        if(play_sound == true)
+        { document.getElementById("mute").src = "../graphics/audio-icon.svg";
+          music.muted = false; change = false; }
+        else if(play_sound == false)
+        { document.getElementById("mute").src = "../graphics/audio-mute-icon.svg";
+          music.muted = true; change = false; }
+      }
+
       var frame = undefined;
 
       display.drawMap(

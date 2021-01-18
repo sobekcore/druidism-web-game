@@ -11,6 +11,7 @@
   <body>
     <div id="unplayable">Sorry! Your screen is too small to play Druidism on this device...</div>
     <div class="loader"><img src="/graphics/loading.svg" alt="Loading..." /></div>
+    <img id="mute" src="../graphics/audio-icon.svg" onclick="javascript:toggleSound()"/>
     <a href="../"><img id="restart" src="../graphics/go-back.svg" style="display: none;"></a>
     <div id="game-completed" style="display: none;"></div>
 
@@ -26,6 +27,39 @@
           loader.className += " hidden";
         }
       );
+
+      // Audio toggle
+      var play_sound = true; var change = false;
+      function toggleSound() { play_sound = !play_sound; change = true; }
+      if(window.innerWidth <= 549) { play_sound = false; change = false; }
+
+      // In-game timer
+      var minutes = 0;
+      var seconds = 0;
+      var totalSeconds = 0;
+      var setOnce = false;
+
+      window.addEventListener("keydown", function()
+        {
+          if(setOnce == false) setInterval(setTime, 1000);
+
+          function setTime()
+          {
+            ++totalSeconds;
+            seconds = pad(totalSeconds % 60);
+            minutes = pad(parseInt(totalSeconds / 60));
+          }
+
+          setOnce = true;
+        }
+      );
+
+      function pad(val)
+      {
+        var valString = val + "";
+        if(valString.length < 2) { return "0" + valString; }
+        else { return valString; }
+    }
 
       // Game loading to canvas
       let sources =

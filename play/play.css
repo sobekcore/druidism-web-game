@@ -96,6 +96,27 @@ p
 
 @keyframes fadeIn { 100% { opacity: 1; } }
 
+#mute
+{
+  position: fixed;
+  width: 70px;
+  height: 70px;
+  padding: 8px;
+  margin: 4px 7px;
+  right: 0px;
+  top: 0px;
+  cursor: pointer;
+  user-select: none;
+  transition: .2s all;
+}
+
+#mute:hover
+{
+  width: 80px;
+  height: 80px;
+  filter: brightness(0.6);
+}
+
 #game-completed
 {
   position: absolute;
@@ -134,7 +155,7 @@ span
   font: bold 110px "Ubuntu", sans-serif;
   text-shadow: 5px 5px rgb(18, 158, 116);
   color: rgb(25, 223, 163);
-  margin-top: -115px;
+  margin-top: -145px;
 }
 
 h2 { font: bold 60px "Ubuntu", sans-serif; }
@@ -175,13 +196,13 @@ h2 { font: bold 60px "Ubuntu", sans-serif; }
 /* Font resizing */
 @media(max-width: 909px)
 {
-  span { font: bold 80px "Ubuntu", sans-serif; margin-top: -80px; }
+  span { font: bold 80px "Ubuntu", sans-serif; margin-top: -110px; }
   h2 { font: bold 45px "Ubuntu", sans-serif; }
 }
 
 @media(max-width: 679px)
 {
-  span { font: bold 60px "Ubuntu", sans-serif; margin-top: -60px; }
+  span { font: bold 60px "Ubuntu", sans-serif; margin-top: -90px; }
   h2 { font: bold 35px "Ubuntu", sans-serif; }
 }
 

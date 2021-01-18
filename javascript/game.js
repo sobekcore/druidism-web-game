@@ -347,6 +347,11 @@ Game.Player.prototype =
   {
     if(!this.jumping && this.velocity_y < 10)
     {
+      var jump = new Audio("../audio/jump.wav");
+      if(play_sound == true) jump.muted = false;
+      else if(play_sound == false) jump.muted = true;
+
+      jump.play();
       this.jumping     = true;
       this.velocity_y -= 13;
     }
@@ -565,6 +570,10 @@ Game.World.prototype =
     {
       let mushroom = this.mushrooms[index];
 
+      var gather = new Audio("../audio/gather.wav");
+      if(play_sound == true) gather.muted = false;
+      else if(play_sound == false) gather.muted = true;
+
       mushroom.updatePosition();
       mushroom.animate();
 
@@ -572,6 +581,7 @@ Game.World.prototype =
       {
         this.mushrooms.splice(this.mushrooms.indexOf(mushroom), 1);
         this.mushroom_count++;
+        gather.play();
       }
     }
 
@@ -589,6 +599,10 @@ Game.World.prototype =
     {
       let complete = this.complete[index];
 
+      var completion = new Audio("../audio/complete.wav");
+      if(play_sound == true) completion.muted = false;
+      else if(play_sound == false) completion.muted = true;
+
       complete.updatePosition();
       complete.animate();
 
@@ -599,13 +613,16 @@ Game.World.prototype =
 
         var span = document.createElement("span");
         var h2 = document.createElement("h2");
+        var br = document.createElement("br");
         span.innerHTML = "Game completed!";
-        h2.innerHTML = "You have collected " + this.mushroom_count + " mushrooms.";
+        h2.innerHTML = "You have collected " + this.mushroom_count + " mushrooms."; h2.appendChild(br);
+        h2.innerHTML = h2.innerHTML + "Completion time: " + minutes + ":" + seconds + ".";
         document.getElementById("restart").style.display = "inline";
         document.getElementById("game-completed").style.display = "block";
 
         document.body.appendChild(span);
         document.body.appendChild(h2);
+        completion.play();
       }
     }
 
