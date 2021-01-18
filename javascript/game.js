@@ -345,12 +345,12 @@ Game.Player.prototype =
 
   jump:function()
   {
+    var jump = new Audio("../audio/jump.wav");
+    if(play_sound == true) jump.muted = false;
+    else if(play_sound == false) jump.muted = true;
+
     if(!this.jumping && this.velocity_y < 10)
     {
-      var jump = new Audio("../audio/jump.wav");
-      if(play_sound == true) jump.muted = false;
-      else if(play_sound == false) jump.muted = true;
-
       jump.play();
       this.jumping     = true;
       this.velocity_y -= 13;
@@ -566,13 +566,13 @@ Game.World.prototype =
     this.player.updatePosition(this.gravity, this.friction);
     this.collideObject(this.player);
 
+    var gather = new Audio("../audio/gather.wav");
+    if(play_sound == true) gather.muted = false;
+    else if(play_sound == false) gather.muted = true;
+
     for(let index = this.mushrooms.length - 1; index > -1; --index)
     {
       let mushroom = this.mushrooms[index];
-
-      var gather = new Audio("../audio/gather.wav");
-      if(play_sound == true) gather.muted = false;
-      else if(play_sound == false) gather.muted = true;
 
       mushroom.updatePosition();
       mushroom.animate();
@@ -595,13 +595,13 @@ Game.World.prototype =
       }
     }
 
+    var completion = new Audio("../audio/complete.wav");
+    if(play_sound == true) completion.muted = false;
+    else if(play_sound == false) completion.muted = true;
+
     for(let index = this.complete.length - 1; index > -1; --index)
     {
       let complete = this.complete[index];
-
-      var completion = new Audio("../audio/complete.wav");
-      if(play_sound == true) completion.muted = false;
-      else if(play_sound == false) completion.muted = true;
 
       complete.updatePosition();
       complete.animate();

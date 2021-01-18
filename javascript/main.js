@@ -9,7 +9,7 @@ window.addEventListener("load", function(event)
     const ZONE_SUFFIX = ".json";
 
     // Looped music playing
-    var music = new Audio("../audio/music.wav");
+    var music = new Audio("../audio/music.ogg");
     music.loop = true;
     window.addEventListener("keydown", function() { music.play(); });
 
