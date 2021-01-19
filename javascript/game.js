@@ -436,7 +436,7 @@ Game.TileSet = function(columns, tile_size)
     new f(112, 124, 16, 4),
     new f(112, 119, 16, 4),
 
-    new f(16, 128, 16, 16) // Complete
+    new f(0, 128, 16, 16) // Complete
   ];
 };
 
