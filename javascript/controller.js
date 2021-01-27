@@ -1,4 +1,4 @@
-// << CONTROLLER FILE >>
+// CONTROLLER FILE (MVC Component)
 
 const Controller = function()
 {

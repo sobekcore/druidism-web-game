@@ -1,4 +1,5 @@
-// << GAME FILE >>
+// GAME FILE (MVC Component)
+
 const Game = function()
 {
   this.world = new Game.World();
@@ -609,7 +610,7 @@ Game.World.prototype =
       if(complete.collideObject(this.player))
       {
         this.complete.splice(this.complete.indexOf(complete), 1);
-        this.player.x = -32; this.player.y = -32;
+        this.player.x = -64; this.player.y = -64;
 
         var span = document.createElement("span");
         var h2 = document.createElement("h2");
@@ -617,7 +618,7 @@ Game.World.prototype =
         span.innerHTML = "Game completed!";
         h2.innerHTML = "You have collected " + this.mushroom_count + " mushrooms."; h2.appendChild(br);
         h2.innerHTML = h2.innerHTML + "Completion time: " + minutes + ":" + seconds + ".";
-        document.getElementById("restart").style.display = "inline";
+        document.getElementById("go-back").style.display = "inline";
         document.getElementById("game-completed").style.display = "block";
 
         document.body.appendChild(span);

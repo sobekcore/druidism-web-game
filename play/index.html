@@ -4,29 +4,24 @@
   <head>
     <meta name="viewport" content="user-scalable=no,width=device-width">
     <link href="play.css" rel="stylesheet" type="text/css">
-    <link rel="icon" type="image/x-icon" href="../graphics/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../graphics/favicon.ico"/>
     <link rel="canonical" href="/play">
     <title>Druidism</title>
   </head>
   <body>
     <div id="unplayable">Sorry! Your screen is too small to play Druidism on this device...</div>
-    <div class="loader"><img src="/graphics/loading.svg" alt="Loading..." /></div>
-    <img id="mute" src="../graphics/audio-icon.svg" onclick="javascript:toggleSound()"/>
-    <a href="../"><img id="restart" src="../graphics/go-back.svg" style="display: none;"></a>
+    <div class="loader"><img src="../graphics/loading.svg" alt="Loading..." /></div>
+
+    <img id="mute" src="../graphics/audio-icon.svg" onclick="toggleSound()"/>
+    <div id="tip">To move press WASD, to jump press Space.</div>
+    <a href="../"><img id="go-back" src="../graphics/go-back.svg" style="display: none;"></a>
     <div id="game-completed" style="display: none;"></div>
 
     <!-- Game full canvas -->
     <canvas></canvas>
 
+    <script src="../javascript/loading.js"></script>
     <script type = "text/javascript">
-
-      // Page loading animation
-      window.addEventListener("load", function()
-        {
-          const loader = document.querySelector(".loader");
-          loader.className += " hidden";
-        }
-      );
 
       // Audio toggle
       var play_sound = true; var change = false;
@@ -51,6 +46,15 @@
           }
 
           setOnce = true;
+
+          // Tip for new players
+          var element = document.getElementById("tip");
+          style = window.getComputedStyle(element);
+          opacity = style.getPropertyValue("opacity");
+
+          if(opacity > 0)
+          { document.getElementById("tip").style.animation = "tipFadeOut 1s"; }
+          else { document.getElementById("tip").style.display = "none"; }
         }
       );
 
@@ -59,7 +63,7 @@
         var valString = val + "";
         if(valString.length < 2) { return "0" + valString; }
         else { return valString; }
-    }
+      }
 
       // Game loading to canvas
       let sources =

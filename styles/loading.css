@@ -1,0 +1,40 @@
+/* Loading Styling */
+
+.loader
+{
+  position: fixed;
+  background-color: var(--regular-brown-color);
+  width: 100%; height: 100%;
+  top: 0; left: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader img
+{
+  width: 100px;
+  animation: spin 1.2s infinite;
+}
+
+.loader.hidden
+{
+  animation: fadeOut 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut
+{
+  100%
+  {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes spin
+{
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}

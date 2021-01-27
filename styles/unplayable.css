@@ -1,0 +1,26 @@
+/* Unplayable Styling */
+
+#unplayable { display: none; }
+
+/* Unplayable Screen */
+@media(max-width: 549px), (max-height: 419px)
+{
+  #unplayable
+  {
+    font: bold 32px "Montserrat", sans-serif;
+    display: grid; position: absolute;
+    text-align: center; align-content: center;
+    background-color: var(--regular-brown-color);
+    width: 100%; height: 100%;
+    padding: 10px 30px 30px 30px;
+  }
+
+  #about
+  {
+    position: absolute;
+    text-align: center;
+    bottom: 20px; right: 0;
+    width: 100%;
+    z-index: 1;
+  }
+}

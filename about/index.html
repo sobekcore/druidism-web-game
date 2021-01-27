@@ -4,7 +4,7 @@
   <head>
     <meta name="viewport" content="user-scalable=no,width=device-width">
     <link href="about.css" rel="stylesheet" type="text/css">
-    <link rel="icon" type="image/x-icon" href="../graphics/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../graphics/favicon.ico"/>
     <meta name="description" content="Creative platformer game with super smooth playstyle. Play as a druid, collect
     mushrooms and reach finishing line. Made with pixel art, HTML and Vanilla JS."/>
     <meta name="keywords" content="platformer, indie, druid, druidism, pixel art, smooth, speed run"/>
@@ -12,36 +12,24 @@
     <title>Druidism - About</title>
   </head>
   <body>
-    <div class="loader"><img src="/graphics/loading.svg" alt="Loading..." /></div>
+    <div class="loader"><img src="../graphics/loading.svg" alt="Loading..." /></div>
     <a id="go-back" href="../"><img src="../graphics/go-back.svg"/></a>
-    <ul>
-      <li><a href="https://twitter.com/sobekcore"><img src="/graphics/twitter-icon.svg"></a></li>
-      <li><a href="https://github.com/sobekcore"><img src="/graphics/github-icon.svg"></a></li>
-    </ul>
-    <div id="content">
-      <img id="logo" src="/graphics/logo.png">
+
+    <!-- Importing Social Icons HTML file -->
+    <html-include src="../html/social-icons.html"></html-include>
+
+    <article>
+      <img id="logo" src="../graphics/logo.png">
       <h3>
-        Move with WASD, jump with space. /// Druidism is a 16-bit platformer game made with HTML and Vanilla JS
-        <span role="img" aria-label="javascript">🍦</span>. With the help of The Great Almighty Internet i've managed
-        to create this game, and make it playable. In this game you are a druid (who would guess it lol) who is trying
-        to finish his path in shorthest time possible, also picking as many mushrooms as possible. Contact me in any
-        way you want if you have any questions. Have fun playing <span role="img" aria-label="smile">🙂</span>
+        Druidism is a 16-bit platformer game made with HTML and Vanilla JS <span role="img" aria-label="javascript">🍦</span>.
+        With the help of The Great Almighty Internet i've managed to create this game, and make it playable. In this game
+        you are a druid (who would guess it lol) who is trying to finish his path in shorthest time possible, also picking
+        as many mushrooms as possible. Contact me in any way you want if you have any questions, feedback highly appreciated.
+        Have fun playing <span role="img" aria-label="smile">🙂</span>
       </h3>
-    </div>
+    </article>
 
-    <script type = "text/javascript">
-      // No animations on load
-      document.body.classList.add("no-transition");
-      document.body.classList.remove("no-transition");
-      setTimeout(() => document.body.classList.remove("no-transition"), 1);
-
-      // Page loading animation
-      window.addEventListener("load", function()
-        {
-          const loader = document.querySelector(".loader");
-          loader.className += " hidden";
-        }
-      );
-    </script>
+    <script src="../javascript/loading.js"></script>
+    <script src="../javascript/import-html.js"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-// << DISPLAY FILE >>
+// DISPLAY FILE (MVC Component)
 
 const Display = function(canvas)
 {

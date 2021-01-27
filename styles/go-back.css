@@ -1,0 +1,25 @@
+/* Go-back Styling */
+
+#go-back
+{
+  position: absolute;
+  left: 0; top: 0;
+  margin: 18px; padding: 7px;
+  width: 70px; height: 70px;
+  transition: ease-in-out .35s;
+  transform-origin: center;
+  z-index: 3;
+}
+
+#go-back:hover
+{
+  animation: rotating .45s;
+  filter: brightness(0.6);
+  width: 85px; height: 85px;
+}
+
+@keyframes rotating
+{
+  from{ transform: rotate(0deg); }
+  to{ transform: rotate(-360deg); }
+}

@@ -1,82 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+/* Import Duplicate Styles */
+@import "./styles/globals.css";
+@import "./styles/loading.css";
+@import "./styles/unplayable.css";
+@import "./styles/social-icons.css";
 
-*
-{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-::selection
-{
-  background-color: #5DA892;
-  color: #BDDFCC;
-}
-
-html
-{
-  height: 100%;
-  width: 100%;
-}
-
+/* Main Title */
 body
 {
   background:
-    url("/graphics/background.png") no-repeat fixed center / contain;
-  background-color: #7C5A3A;
-  -webkit-tap-highlight-color: transparent;
-  image-rendering: pixelated;
-  height: 100%;
-  width: 100%;
+    url("./graphics/background.png") no-repeat fixed center / contain;
+  background-color: var(--regular-brown-color);
 }
 
-.no-transition * { transition: none !important; }
-
-/* Loading */
-.loader
-{
-  position: fixed;
-  background-color: #7C5A3A;
-  z-index: 99;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loader img
-{
-  width: 100px;
-  animation: spin 1.2s infinite;
-}
-
-.loader.hidden
-{
-  animation: fadeOut 1s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes fadeOut
-{
-  100%
-  {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-@keyframes spin
-{
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
-}
-/* ------- */
-
-#content
+main
 {
   align-content: center;
   align-items: space-around;
@@ -95,9 +31,9 @@ body
 button
 {
   font: bold 1em "Ubuntu", sans-serif;
-  background-color: #5f442b;
+  background-color: #5F442B;
   text-transform: uppercase;
-  color: #53aa84;
+  color: #53AA84;
   padding: 12px 40px;
   border: 4px solid black;
   border-radius: 12px;
@@ -118,78 +54,3 @@ button:focus { outline: 0; }
 #play { margin-bottom: 22px; }
 #play button { font-size: 60px; }
 #about button { font-size: 28px; }
-
-ul
-{
-  position:absolute;
-  right: 0;
-  display: inline-flex;
-  list-style: none;
-  margin: 11px;
-}
-
-ul li
-{
-  margin: 4px 7px 15px 7px;
-  border-radius: 8px;
-  border: 4px solid;
-  text-align: center;
-  width: 55px;
-  height: 55px;
-  right: 0;
-  padding-top: 8px;
-  line-height: 1px;
-  transition: all 0.3s;
-}
-
-ul li
-{
-  border-color: black;
-  background-color: #3E8767;
-}
-
-ul li img
-{
-  box-sizing: content-box;
-  width: 36px;
-  height: 36px;
-  padding: 9px;
-  margin: -11px;
-  transition: all 0.3s;
-}
-
-ul li:hover
-{
-  background-color: #8ED3AB;
-  transform: rotate(6deg) scale(1.25);
-}
-
-ul li img:hover { filter: brightness(2) saturate(0.9); }
-
-#unplayable { display: none; }
-
-/* Unplayable screen */
-@media(max-width: 549px), (max-height: 419px)
-{
-  #unplayable
-  {
-    font: bold 32px "Montserrat", sans-serif;
-    display: grid;
-    position: absolute;
-    text-align: center;
-    align-content: center;
-    background-color: #7C5A3A;
-    width: 100%;
-    height: 100%;
-    padding: 10px 30px 30px 30px;
-  }
-
-  #about
-  {
-    position: absolute;
-    text-align: center;
-    bottom: 20px;
-    width: 100%;
-    z-index: 1;
-  }
-}

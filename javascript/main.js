@@ -1,4 +1,4 @@
-// << MAIN FILE >>
+// MAIN FILE (MVC Component)
 
 window.addEventListener("load", function(event)
   {
@@ -8,7 +8,7 @@ window.addEventListener("load", function(event)
     const ZONE_PREFIX = "../zones/zone";
     const ZONE_SUFFIX = ".json";
 
-    // Looped music playing
+    // << Looped music playing >>
     var music = new Audio("../audio/music.ogg");
     music.loop = true;
     window.addEventListener("keydown", function() { music.play(); });

@@ -1,4 +1,4 @@
-// << ENGINE FILE >>
+// ENGINE FILE (MVC Component)
 
 const Engine = function(time_step, update, render)
 {

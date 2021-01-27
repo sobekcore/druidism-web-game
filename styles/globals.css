@@ -1,0 +1,38 @@
+/* CSS Global Styling */
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+*
+{
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+
+  --regular-brown-color: #7C5A3A;
+  --light-teal-color: #7EC29B;
+}
+
+html
+{ height: 100%; width: 100%; }
+
+body
+{
+  align-content: center;
+  align-items: space-around;
+  background-color: var(--regular-brown-color);
+  -webkit-tap-highlight-color: transparent;
+  image-rendering: pixelated;
+  height: 100%; width: 100%;
+  display: grid;
+  justify-items: center;
+}
+
+.no-transition *
+{ transition: none !important; }
+
+::selection
+{
+  background-color: #5DA892;
+  color: #BDDFCC;
+}
