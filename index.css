@@ -23,8 +23,7 @@ main
 
 #logo
 {
-  width: 800px;
-  max-width: 60vw;
+  width: 800px; max-width: 60vw;
   margin-bottom: 40px;
 }
 

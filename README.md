@@ -1,6 +1,6 @@
 # --== Druidism ==--
 
-Druidism is a web platformer made with HTML, Vanilla JS and pixel art. You can play any playstyle you want, slow, fast or speed run. Thanks to the internet the game was created and learned me everything essential to create it.
+Druidism is a web platformer made with HTML, Vanilla JS and pixel art. The game is created in MVC approach. You can play any playstyle you want, slow, fast or speed run. Thanks to the internet the game was created and learned me everything essential to create it.
 
 ## How to run it? :rocket:
 
